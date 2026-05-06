@@ -3,3 +3,4 @@ gunicorn
 numpy==2.4.4
 scikit-learn==1.8.0
 reportlab==4.5.0
+pandas
