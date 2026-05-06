@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart AI Dashboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- LEFT -->
+    <div class="left">
+
+        <h2>❤️ Heart Risk AI Dashboard</h2>
+        <p style="opacity:0.7;">Medical AI prediction system</p>
+
+        <form action="/predict" method="post" class="card">
+
+            <div class="form-grid">
+
+                <input type="number" name="age" placeholder="Age" required>
+
+                <select name="sex" required >
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+
+                <select name="cp" required>
+                    <option value="" disabled selected>Chest Pain Type</option>
+                    <option value="0">Typical Angina</option>
+                    <option value="1">Atypical Angina</option>
+                    <option value="2">Non-anginal Pain</option>
+                    <option value="3">No Pain</option>
+                </select>
+
+                <input type="number" name="trestbps"  autocomplete="off" placeholder="Resting Blood Pressure" required>
+
+                <input type="number" name="chol"  autocomplete="off" placeholder="Cholesterol" required>
+
+                <select name="fbs" required>
+                    <option value="" disabled selected>Blood Sugar Level</option>
+                    <option value="1">High </option>
+                    <option value="0">Normal</option>
+                </select>
+
+                <select name="restecg" required>
+                    <option value="" disabled selected>ECG Result</option>
+                    <option value="0">Normal</option>
+                    <option value="1">Minor Issue</option>
+                    <option value="2">Major Issue</option>
+                </select>
+
+                <input type="number" name="thalach"  autocomplete="off" placeholder="Max Heart Rate" required>
+
+                <select name="exang" required>
+                    <option value="" disabled selected>Exercise Induced Pain</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+
+                <input type="number" step="0.1" name="oldpeak" autocomplete="off"  placeholder="Oldpeak" required>
+
+                <select name="slope" required>
+                    <option value="" disabled selected>Slope Type</option>
+                    <option value="0">Upsloping</option>
+                    <option value="1">Flat</option>
+                    <option value="2">Downsloping</option>
+                </select>
+
+                <select name="ca" required>
+                    <option value="" disabled selected>Number of Vessels blocked</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+
+                <select name="thal" required>
+                    <option value="" disabled selected>Thalassemia Condition</option>
+                    <option value="1">Normal</option>
+                    <option value="2">Fixed Defect</option>
+                    <option value="3">Reversible Defect</option>
+                </select>
+
+            </div>
+
+            <button type="submit">🚀 Analyze Risk</button>
+
+        </form>
+
+    </div>
+
+    <!-- RIGHT -->
+   <!-- RIGHT SIDE -->
+<div class="right">
+
+    <h2>📊 Analysis Panel</h2>
+
+    {% if prediction_text %}
+
+    <div class="result {% if 'High' in prediction_text %}high{% else %}low{% endif %}">
+
+        <h3>{{ prediction_text }}</h3>
+
+        <p><b>Risk Level:</b> {{ risk }}%</p>
+
+        <p><b>Advice:</b> {{ advice }}</p>
+
+        <hr style="opacity:0.3;">
+
+        <h4>🧠 Why this result?</h4>
+
+        <ul style="text-align:left;">
+            {% for r in reasons %}
+                <li>{{ r }}</li>
+            {% endfor %}
+        </ul>
+        <form action="/download_pdf" method="POST">
+
+    <input type="hidden" name="age" value="{{ raw_data.age }}">
+    <input type="hidden" name="sex" value="{{ raw_data.sex }}">
+    <input type="hidden" name="cp" value="{{ raw_data.cp }}">
+    <input type="hidden" name="trestbps" value="{{ raw_data.trestbps }}">
+    <input type="hidden" name="chol" value="{{ raw_data.chol }}">
+    <input type="hidden" name="fbs" value="{{ raw_data.fbs }}">
+    <input type="hidden" name="restecg" value="{{ raw_data.restecg }}">
+    <input type="hidden" name="thalach" value="{{ raw_data.thalach }}">
+    <input type="hidden" name="exang" value="{{ raw_data.exang }}">
+    <input type="hidden" name="oldpeak" value="{{ raw_data.oldpeak }}">
+    <input type="hidden" name="slope" value="{{ raw_data.slope }}">
+    <input type="hidden" name="ca" value="{{ raw_data.ca }}">
+    <input type="hidden" name="thal" value="{{ raw_data.thal }}">
+
+    <button type="submit">📄 Download Report</button>
+</form>
+
+
+    </div>
+
+    {% else %}
+
+    <p style="opacity:0.6;">
+        Fill the form to see AI prediction and explanation here...
+    </p>
+
+    {% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>
