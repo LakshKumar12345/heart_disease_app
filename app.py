@@ -21,6 +21,7 @@ model = pickle.load(open("heartt_model.pkl", "rb"))
 # ================= HOME =================
 @app.route("/")
 def home():
+    
     return render_template(
         "index.html",
         prediction_text=session.get("result"),
@@ -339,7 +340,7 @@ def download_pdf():
         mimetype="application/pdf",
         headers={"Content-Disposition": "attachment;filename=Heart_Report.pdf"}
     )
-
+    session.clear()
 
 # ================= RUN =================
 if __name__ == "__main__":

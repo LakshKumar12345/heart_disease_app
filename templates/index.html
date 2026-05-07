@@ -7,7 +7,7 @@
 
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -19,7 +19,7 @@
     <!-- LEFT -->
     <div class="left">
 
-        <h2>❤️ Heart Risk AI Dashboard</h2>
+        <h1><i class="fa-solid fa-heart-pulse"></i> Heart Disease Prediction System</h1>
         <p style="opacity:0.7;">Medical AI prediction system</p>
 
         <form action="/predict" method="post" class="card">
