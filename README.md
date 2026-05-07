@@ -90,15 +90,14 @@ Deployed using Railway
 ---
 
 ## 📁 Project Structure
-heart_disease_app/
-│
-├── app.py
-├── heartt_model.pkl
-├── requirements.txt
-├── templates/
-│ └── index.html
-├── static/
-└── screenshots/
+📦 heart_disease_app
+┣ 📄 app.py
+┣ 📄 heartt_model.pkl
+┣ 📄 requirements.txt
+┣ 📁 templates
+┃ ┗ 📄 index.html
+┣ 📁 static
+┗ 📁 screenshots
 
 ---
 
